@@ -156,6 +156,10 @@ all_data <- bind_rows(dataset2_raw, dataset4_raw, dataset5_raw, dataset1a_raw, d
 					  dataset20_raw, dataset17_raw)
 
 
+
+
+write_csv(all_data, "data-processed/all_data.csv")
+
 all_data %>% 
 	ggplot(aes(x = dha, fill = ecosystem)) + geom_histogram() +
 	facet_wrap(ecosystem~ group, scales = "free_y")
