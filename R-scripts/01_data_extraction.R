@@ -18,7 +18,7 @@ dataset4_raw <- read_excel("data-raw/4-DHA_percent_metanalysis.xlsx") %>%
 	rename(epa = percent_20_5n3_epa) %>% 
 	rename(dha = percent_22_6n3_dha) %>% 
 	mutate(group = ifelse(trophic_position == "Algae", "primary_producer", "consumer")) %>% 
-	select(ecosystem, group, epa, dha) %>% 
+	select(ecosystem, group, epa, dha, taxa) %>% 
 	mutate(source_dataset = "4") %>% 
 	mutate(dha = str_replace(dha, "n/a", "NA")) %>% 
 	mutate(dha = str_replace_na(dha, replacement = NA)) %>% 
@@ -160,9 +160,14 @@ all_data <- bind_rows(dataset2_raw, dataset4_raw, dataset5_raw, dataset1a_raw, d
 
 write_csv(all_data, "data-processed/all_data.csv")
 
+unique(all_data$source_dataset)
+
 all_data %>% 
 	ggplot(aes(x = dha, fill = ecosystem)) + geom_histogram() +
 	facet_wrap(ecosystem~ group, scales = "free_y")
+
+all_data %>% 
+	filter(ecosystem == "freshwater", group == "consumer") %>% View
 
 
 

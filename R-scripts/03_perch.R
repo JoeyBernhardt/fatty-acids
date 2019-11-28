@@ -18,9 +18,11 @@ pd <- read_excel("data-raw/perch_dietcontr_FAresources.xlsx", sheet = "SIA contr
 	select(sample, habitat, Cladocera, Copepoda, Fish, Macroinvertebrate) %>% 
 	gather(key = prey_type, value = amount, 3:6) %>% 
 	group_by(habitat, prey_type) %>% 
-	summarise_each(funs(mean), amount) %>% 
-	rename(contribution = amount) %>% 
-	mutate(contribution = contribution * 100)
+	summarise_each(funs(mean, std.error), amount) %>%
+	rename(contribution = mean) %>% 
+	mutate(contribution = contribution * 100) %>% 
+	mutate(std.error = std.error * 100)
+write_csv(pd, "data-processed/perch-diet-contribution.csv")
 
 
 	
@@ -29,7 +31,7 @@ fa <- read_excel("data-raw/perch_dietcontr_FAresources.xlsx", sheet = "FA resour
 	rename(dha = x22_6n_3_dha) %>%
 	rename(epa = x20_5n_3_epa) %>%
 	rename(ara =x20_4n_6_ara) %>% 
-	mutate(resource_type = ifelse(resource_type == "fish", "Fish", resource_type)) %>% View
+	mutate(resource_type = ifelse(resource_type == "fish", "Fish", resource_type)) %>% 
 	group_by(resource_type) %>% 
 	summarise_each(funs(mean, std.error), epa, dha, ara)
 
