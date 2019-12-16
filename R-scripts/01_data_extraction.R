@@ -25,13 +25,13 @@ dataset4_raw <- read_excel("data-raw/4-DHA_percent_metanalysis.xlsx") %>%
 	mutate(dha = as.numeric(dha))
 
 dataset2_raw <- read_excel("data-raw/2-Columbo-et-al_Marine_and_Terrestrial_PUFA_data_set.xlsx") %>% 
-	clean_names() %>%
-	mutate(group = ifelse(functional_group == "Phytoplankton", "primary_producer", "consumer")) %>% 
+	clean_names() %>% 
+	mutate(group = ifelse(functional_group == "Phytoplankton", "primary_producer", "consumer")) %>%  
 	mutate(ecosystem = str_to_lower(habitat)) %>% 
-	select(ecosystem, group, epa, dha) %>% 
+	select(ecosystem, group, epa, dha, genus, species) %>% 
 	mutate(source_dataset = "2")
 
-
+unique(dataset2_raw$functional_group)
 
 dataset1a_raw <- read_excel("data-raw/1a-Wang_et_al_data.xlsx") %>% 
 	clean_names() %>% 
@@ -162,9 +162,12 @@ write_csv(all_data, "data-processed/all_data.csv")
 
 unique(all_data$source_dataset)
 
+all_data <- read_csv("data-processed/all_data.csv") %>% 
+	mutate(group = ifelse(group == "primary producer", "primary_producer", group))
+
 all_data %>% 
 	ggplot(aes(x = dha, fill = ecosystem)) + geom_histogram() +
-	facet_wrap(ecosystem~ group, scales = "free_y")
+	facet_wrap(ecosystem ~ group, scales = "free_y")
 
 all_data %>% 
 	filter(ecosystem == "freshwater", group == "consumer") %>% View
