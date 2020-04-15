@@ -1,0 +1,7 @@
+ecosystem,habitat,habitat_notes,trophic_position,species,order,Class,original_study,name_of_data_extractor,study_number,date_data_extracted,data_from,source,common_name,percent_22_6n3_dha,percent_20_5n3_epa,percent_18_3n3_ala
+freshwater,freshwater,tadpole,consumer,Lithobates clamitans,Anura,Amphibia,"Whiles et al., 2010",Cam,24,28_11_2019,"Whiles et al., 2010",wild,Green frog,5,7.2,3.1
+littoral,freshwater,tadpole,consumer,Lithobates clamitans,Anura,Amphibia,"Whiles et al., 2010",Cam,24,28_11_2019,"Whiles et al., 2010",wild,Green frog,2.6,5,4.2
+freshwater,freshwater,tadpole,consumer,Lithobates catesbeianus,Anura,Amphibia,"Whiles et al., 2010",Cam,24,28_11_2019,"Whiles et al., 2010",,Bullfrog,9.9,5.8,2.7
+,freshwater,tadpole,consumer,Lithobates catesbeianus,Anura,Amphibia,"Whiles et al., 2010",Cam,24,28_11_2019,"Whiles et al., 2010",,Bullfrog,7.1,6.1,2.1
+freshwater,freshwater,tadpole,consumer,Pseudacris crucifer,Anura,Amphibia,"Whiles et al., 2010",Cam,24,28_11_2019,"Whiles et al., 2010",,Spring peeper,3.5,7.8,3.8
+,freshwater,tadpole,consumer,Pseudacris crucifer,Anura,Amphibia,"Whiles et al., 2010",Cam,24,28_11_2019,"Whiles et al., 2010",,Spring peeper,4.5,5.5,3.6

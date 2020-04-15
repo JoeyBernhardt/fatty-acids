@@ -1,0 +1,39 @@
+ecosystem,habitat,Notes,trophic_position,species,family,Class,original_study,name_of_data_extractor,study_number,date_data_extracted,data_from,source,common_name,percent_22_6n3_dha,percent_20_5n3_epa,percent_18_3n3_ala
+marine,pelagic,Mystacial fat,consumer,Phoca hispida hispida,,Mammalia,"Käkelä & Hyvärinen, 1996",Cam,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Ringed seal,8.7,8.7,0.8
+marine,pelagic,Supercilliary fat,consumer,Phoca hispida hispida,,Mammalia,"Käkelä & Hyvärinen, 1996",Cam,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Ringed seal,10.2,9.2,0.8
+marine,pelagic,Cheek,consumer,Phoca hispida hispida,,Mammalia,"Käkelä & Hyvärinen, 1996",Cam,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Ringed seal,10.7,9.5,0.9
+marine,pelagic,Crown,consumer,Phoca hispida hispida,,Mammalia,"Käkelä & Hyvärinen, 1996",Cam,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Ringed seal,11.4,9.1,0.8
+marine,pelagic,Foreflipper,consumer,Phoca hispida hispida,,Mammalia,"Käkelä & Hyvärinen, 1996",Cam,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Ringed seal,11.3,8.7,0.9
+marine,pelagic,Hindflipper,consumer,Phoca hispida hispida,,Mammalia,"Käkelä & Hyvärinen, 1996",Cam,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Ringed seal,11.7,8.9,0.8
+marine,pelagic,Ventral upper layer,consumer,Phoca hispida hispida,,Mammalia,"Käkelä & Hyvärinen, 1996",Cam,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Ringed seal,11,9.4,0.8
+marine,pelagic,Ventral inner layer,consumer,Phoca hispida hispida,,Mammalia,"Käkelä & Hyvärinen, 1996",Cam,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Ringed seal,11.9,7.1,1
+marine,pelagic,Dorsal upper layer,consumer,Phoca hispida hispida,,Mammalia,"Käkelä & Hyvärinen, 1996",Cam,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Ringed seal,10.9,9,0.8
+marine,pelagic,Dosral inner layer,consumer,Phoca hispida hispida,,Mammalia,"Käkelä & Hyvärinen, 1996",Cam,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Ringed seal,12.2,7.2,1
+marine,pelagic,Mystacial fat,consumer,Phoca hispida botnica,,Mammalia,"Käkelä & Hyvärinen, 1996",Cam,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Ringed seal,6.2,6.1,2.2
+marine,pelagic,Supercilliary fat,consumer,Phoca hispida botnica,,Mammalia,"Käkelä & Hyvärinen, 1996",Cam,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Ringed seal,8.6,7.4,2.3
+marine,pelagic,Cheek,consumer,Phoca hispida botnica,,Mammalia,"Käkelä & Hyvärinen, 1996",Cam,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Ringed seal,9.7,8,2.3
+marine,pelagic,Crown,consumer,Phoca hispida botnica,,Mammalia,"Käkelä & Hyvärinen, 1996",Cam,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Ringed seal,9.3,7.4,2.4
+marine,pelagic,Foreflipper,consumer,Phoca hispida botnica,,Mammalia,"Käkelä & Hyvärinen, 1996",Cam,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Ringed seal,9.7,7.4,2.4
+marine,pelagic,Hindflipper,consumer,Phoca hispida botnica,,Mammalia,"Käkelä & Hyvärinen, 1996",Cam,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Ringed seal,10.5,8.5,2.7
+marine,pelagic,Ventral upper layer,consumer,Phoca hispida botnica,,Mammalia,"Käkelä & Hyvärinen, 1996",Cam,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Ringed seal,10.5,9.2,2.3
+marine,pelagic,Ventral inner layer,consumer,Phoca hispida botnica,,Mammalia,"Käkelä & Hyvärinen, 1996",Cam,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Ringed seal,11.1,5.9,1.8
+marine,pelagic,Dorsal upper layer,consumer,Phoca hispida botnica,,Mammalia,"Käkelä & Hyvärinen, 1996",Cam,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Ringed seal,9.9,8.4,2.3
+marine,pelagic,Dosral inner layer,consumer,Phoca hispida botnica,,Mammalia,"Käkelä & Hyvärinen, 1996",Cam,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Ringed seal,10.7,5.8,1.7
+freshwater,pelagic,forefoot,consumer,Lutra lutra,,Mammalia,"Käkelä & Hyvärinen, 1996",,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Eurasian Otter,3,1.9,3.7
+freshwater,pelagic,hindflipper,consumer,Lutra lutra,,Mammalia,"Käkelä & Hyvärinen, 1996",,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Eurasian Otter,2.8,1.9,3.9
+freshwater,pelagic,tail tip,consumer,Lutra lutra,,Mammalia,"Käkelä & Hyvärinen, 1996",,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Eurasian Otter,3,2,4.7
+freshwater,pelagic,tail base,consumer,Lutra lutra,,Mammalia,"Käkelä & Hyvärinen, 1996",,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Eurasian Otter,3.4,2.1,4.9
+freshwater,pelagic,subcutaneous ventral,consumer,Lutra lutra,,Mammalia,"Käkelä & Hyvärinen, 1996",,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Eurasian Otter,3.9,2.4,4.6
+freshwater,pelagic,Inguinal,consumer,Lutra lutra,,Mammalia,"Käkelä & Hyvärinen, 1996",,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Eurasian Otter,4.1,2.6,5
+freshwater,pelagic,perirenal,consumer,Lutra lutra,,Mammalia,"Käkelä & Hyvärinen, 1996",,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Eurasian Otter,3.9,2.4,5.2
+terrestrial,,forefoot,consumer,Nyctereutes procynoides,,Mammalia,"Käkelä & Hyvärinen, 1996",,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Raccoon Dog,0.8,0.5,2.8
+terrestrial,,hindfoot,consumer,Nyctereutes procynoides,,Mammalia,"Käkelä & Hyvärinen, 1996",,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Raccoon Dog,1,0.6,3
+terrestrial,,Dorsal upper layer,consumer,Nyctereutes procynoides,,Mammalia,"Käkelä & Hyvärinen, 1996",,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Raccoon Dog,1.4,0.7,2.3
+terrestrial,,Dorsal inner layer,consumer,Nyctereutes procynoides,,Mammalia,"Käkelä & Hyvärinen, 1996",,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Raccoon Dog,1.4,0.6,2.2
+terrestrial,,Inguinal,consumer,Nyctereutes procynoides,,Mammalia,"Käkelä & Hyvärinen, 1996",,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Raccoon Dog,1.5,0.7,2.2
+terrestrial,,Omental,consumer,Nyctereutes procynoides,,Mammalia,"Käkelä & Hyvärinen, 1996",,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Raccoon Dog,1.4,0.6,2.6
+terrestrial,,perirenal,consumer,Nyctereutes procynoides,,Mammalia,"Käkelä & Hyvärinen, 1996",,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Raccoon Dog,1.8,0.5,2.2
+terrestrial,,Subcutaneous,consumer,Urus arctos,,Mammalia,"Käkelä & Hyvärinen, 1996",,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Brown Bear,0.1,0.1,1.4
+terrestrial,,foot pad,consumer,Urus arctos,,Mammalia,"Käkelä & Hyvärinen, 1996",,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Brown Bear,0.1,0.1,1.7
+terrestrial,,Subcutaneous,consumer,Canis lupus,,Mammalia,"Käkelä & Hyvärinen, 1996",,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Grey Wolf,0.1,0.2,2.5
+terrestrial,,foot pad,consumer,Canis lupus,,Mammalia,"Käkelä & Hyvärinen, 1996",,27,29_11_19,"Käkelä & Hyvärinen, 1996",,Grey Wolf,0.2,0.2,2.6

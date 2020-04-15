@@ -1,0 +1,15 @@
+ecosystem,habitat,Notes,trophic_position,species,family,Class,original_study,name_of_data_extractor,study_number,date_data_extracted,data_from,source,common_name,percent_22_6n3_dha,percent_20_5n3_epa,percent_18_3n3_ala
+terrestrial,,"tail, bare",consumer,Castor canadensis,,Mammalia,"Käkelä & Hyvärinen, 1996b",Cam,28,29_11_19,"Käkelä & Hyvärinen, 1996b",,Canadian beaver,trace,0.1,18
+terrestrial,,"tail, base",consumer,Castor canadensis,,Mammalia,"Käkelä & Hyvärinen, 1996b",Cam,28,29_11_19,"Käkelä & Hyvärinen, 1996b",,Canadian beaver,trace,trace,15.6
+terrestrial,,fore foot,consumer,Castor canadensis,,Mammalia,"Käkelä & Hyvärinen, 1996b",Cam,28,29_11_19,"Käkelä & Hyvärinen, 1996b",,Canadian beaver,trace,0.1,16.4
+terrestrial,,hind flipper,consumer,Castor canadensis,,Mammalia,"Käkelä & Hyvärinen, 1996b",Cam,28,29_11_19,"Käkelä & Hyvärinen, 1996b",,Canadian beaver,trace,0.1,16.5
+terrestrial,,subcutaneous ventral,consumer,Castor canadensis,,Mammalia,"Käkelä & Hyvärinen, 1996b",Cam,28,29_11_19,"Käkelä & Hyvärinen, 1996b",,Canadian beaver,trace,trace,13.1
+terrestrial,,"tail, bare",consumer,Castor fiber,,Mammalia,"Käkelä & Hyvärinen, 1996b",Cam,28,29_11_19,"Käkelä & Hyvärinen, 1996b",,Eurasian beaver,,0.1,20.8
+terrestrial,,fore foot,consumer,Castor fiber,,Mammalia,"Käkelä & Hyvärinen, 1996b",Cam,28,29_11_19,"Käkelä & Hyvärinen, 1996b",,Eurasian beaver,trace,0.1,16.9
+terrestrial,,hind flipper,consumer,Castor fiber,,Mammalia,"Käkelä & Hyvärinen, 1996b",Cam,28,29_11_19,"Käkelä & Hyvärinen, 1996b",,Eurasian beaver,trace,0.1,19.8
+terrestrial,,subcutaneous ventral,consumer,Castor fiber,,Mammalia,"Käkelä & Hyvärinen, 1996b",Cam,28,29_11_19,"Käkelä & Hyvärinen, 1996b",,Eurasian beaver,trace,0.1,11.3
+terrestrial,,"tail, top",consumer,Ondatra zibethicus,,Mammalia,"Käkelä & Hyvärinen, 1996b",Cam,28,29_11_19,"Käkelä & Hyvärinen, 1996b",,Muskrat,0.5,0.2,11.3
+terrestrial,,"tail, base",consumer,Ondatra zibethicus,,Mammalia,"Käkelä & Hyvärinen, 1996b",Cam,28,29_11_19,"Käkelä & Hyvärinen, 1996b",,Muskrat,0.5,0.2,7.9
+terrestrial,,hind foot,consumer,Ondatra zibethicus,,Mammalia,"Käkelä & Hyvärinen, 1996b",Cam,28,29_11_19,"Käkelä & Hyvärinen, 1996b",,Muskrat,0.4,0.1,10.8
+terrestrial,,subcutaneous ventral,consumer,Ondatra zibethicus,,Mammalia,"Käkelä & Hyvärinen, 1996b",Cam,28,29_11_19,"Käkelä & Hyvärinen, 1996b",,Muskrat,1.7,0.2,8.9
+terrestrial,,subcutaneous dorsal,consumer,Ondatra zibethicus,,Mammalia,"Käkelä & Hyvärinen, 1996b",Cam,28,29_11_19,"Käkelä & Hyvärinen, 1996b",,Muskrat,1.6,0.2,5.6

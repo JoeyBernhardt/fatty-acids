@@ -1,0 +1,10 @@
+ecosystem,habitat,Notes,trophic_position,species,family,Class,original_study,name_of_data_extractor,study_number,date_data_extracted,data_from,source,common_name,percent_22_6n3_dha,percent_20_5n3_epa,percent_18_3n3_ala
+terrestrial,,Liver,consumer,Meles meles,mustelidae,Mammalia,"Zalewski et al., 2007",,26,28_11_2019,Cam,,Eurasian badger,0.8,2.28,1.1
+terrestrial,,Fat,consumer,Meles meles,mustelidae,Mammalia,"Zalewski et al., 2007",,26,28_11_2019,Cam,,Eurasian badger,0.31,1.07,2.14
+terrestrial,,Subcutaneus,consumer,Meles meles,mustelidae,Mammalia,"Zalewski et al., 2007",,26,28_11_2019,Cam,,Eurasian badger,0.36,1.61,2.03
+terrestrial,,Perirenal,consumer,Meles meles,mustelidae,Mammalia,"Zalewski et al., 2007",,26,28_11_2019,Cam,,Eurasian badger,0.51,1.23,2.05
+terrestrial,,Periintestinal,consumer,Meles meles,mustelidae,Mammalia,"Zalewski et al., 2007",,26,28_11_2019,Cam,,Eurasian badger,0.3,0.96,1.78
+terrestrial,,Tenderloin,consumer,Meles meles,mustelidae,Mammalia,"Zalewski et al., 2007",,26,28_11_2019,Cam,,Eurasian badger,0.1,0.31,0.54
+terrestrial,,,consumer,Meles meles,mustelidae,Mammalia,"Käkelä and Hyvärinen, 1996;",,26,28_11_2019,Cam,,Eurasian badger,0.36,0.84,2.03
+terrestrial,,,consumer,Ursus arctos,Ursidae,Mammalia,"Käkelä and Hyvärinen, 1996;",,26,28_11_2019,Cam,,Brown bear,0.1,0.2,1.4
+terrestrial,,,consumer,Castor canadensis,Castoridae,Mammalia,"Käkelä and Hyvärinen, 1996;",,26,28_11_2019,Cam,,Eurasian beaver,NA,0.23,16.23

@@ -133,7 +133,7 @@ dataset20_raw <- read_excel("data-raw/20-amphibian-Fritz-et-al-2019.xlsx") %>%
 	select(species, dha, epa, ecosystem, group) %>% 
 	mutate(source_dataset = "20")
 
-dataset21_raw <- read_excel("data-raw/21-Chrinomids Makhutova2017_Article_FattyAcidCompositionAndContent.xlsx") %>% 
+dataset21_raw <- read_excel("data-raw/21-Makhutova-2017.xlsx") %>% 
 	clean_names() %>%
 	rename(dha = percent_22_6n3_dha) %>% 
 	rename(epa = percent_20_5n3_epa) %>% 
@@ -149,11 +149,60 @@ dataset17_raw <- read_excel("data-raw/17-NL-terrestrial-plant-compilation.xlsx")
 	select(genus, species, dha, epa, ecosystem, group) %>% 
 	mutate(source_dataset = "17")
 
+dataset23_raw <- read_csv("data-raw/23-DGEBUADZE-et-al.-2017-Tadpole-Fatty-content.csv") %>% 
+	clean_names() %>% 
+	rename(dha = percent_22_6n3_dha) %>% 
+	rename(epa = percent_20_5n3_epa) %>% 
+	rename(group = trophic_position) %>% 
+	select(species, dha, epa, ecosystem, group) %>% 
+	mutate(source_dataset = "23")
+
+dataset24_raw <- read_csv("data-raw/24-Whiles-2010.csv") %>% 
+	clean_names() %>% 
+	rename(dha = percent_22_6n3_dha) %>% 
+	rename(epa = percent_20_5n3_epa) %>% 
+	rename(group = trophic_position) %>% 
+	select(species, dha, epa, ecosystem, group) %>% 
+	mutate(source_dataset = "24")
+
+dataset25_raw <- read_csv("data-raw/25-Cartland-Shaw-1998.csv") %>% 
+	clean_names() %>% 
+	rename(dha = percent_22_6n3_dha) %>% 
+	rename(epa = percent_20_5n3_epa) %>% 
+	rename(group = trophic_position) %>% 
+	select(species, dha, epa, ecosystem, group) %>% 
+	mutate(source_dataset = "25")
+
+dataset26_raw <- read_csv("data-raw/26-Zalewski-2007.csv") %>% 
+	clean_names() %>% 
+	rename(dha = percent_22_6n3_dha) %>% 
+	rename(epa = percent_20_5n3_epa) %>% 
+	rename(group = trophic_position) %>% 
+	select(species, dha, epa, ecosystem, group) %>% 
+	mutate(source_dataset = "26")
+
+dataset27_raw <- read_csv("data-raw/27-Kakela-Hyvarinen-1996.csv") %>% 
+	clean_names() %>% 
+	rename(dha = percent_22_6n3_dha) %>% 
+	rename(epa = percent_20_5n3_epa) %>% 
+	rename(group = trophic_position) %>% 
+	select(species, dha, epa, ecosystem, group) %>% 
+	mutate(source_dataset = "27")
+
+dataset28_raw <- read_csv("data-raw/28-Kakela-Hyvarinen-1996b.csv") %>% 
+	clean_names() %>% 
+	rename(dha = percent_22_6n3_dha) %>% 
+	rename(epa = percent_20_5n3_epa) %>% 
+	rename(group = trophic_position) %>% 
+	select(species, dha, epa, ecosystem, group) %>% 
+	mutate(source_dataset = "28")
+
 
 all_data <- bind_rows(dataset2_raw, dataset4_raw, dataset5_raw, dataset1a_raw, dataset1b_raw,
 					  dataset6_raw, dataset7_raw, dataset15_raw,
 					  dataset16_raw, dataset19_raw, dataset22_raw,
-					  dataset20_raw, dataset17_raw)
+					  dataset20_raw, dataset17_raw, dataset21_raw, dataset23_raw,
+					  dataset24_raw, dataset25_raw, dataset26_raw)
 
 
 
