@@ -4644,3 +4644,54 @@ terrestrial,consumer,0.31,0.1,NA,Meles meles,26,NA,NA,NA,NA,NA,NA,NA,NA
 terrestrial,consumer,0.84,0.36,NA,Meles meles,26,NA,NA,NA,NA,NA,NA,NA,NA
 terrestrial,consumer,0.2,0.1,NA,Ursus arctos,26,NA,NA,NA,NA,NA,NA,NA,NA
 terrestrial,consumer,0.23,NA,NA,Castor canadensis,26,NA,NA,NA,NA,NA,NA,NA,NA
+marine,consumer,8.7,8.7,NA,Phoca hispida hispida,27,NA,NA,NA,NA,NA,NA,NA,NA
+marine,consumer,9.2,10.2,NA,Phoca hispida hispida,27,NA,NA,NA,NA,NA,NA,NA,NA
+marine,consumer,9.5,10.7,NA,Phoca hispida hispida,27,NA,NA,NA,NA,NA,NA,NA,NA
+marine,consumer,9.1,11.4,NA,Phoca hispida hispida,27,NA,NA,NA,NA,NA,NA,NA,NA
+marine,consumer,8.7,11.3,NA,Phoca hispida hispida,27,NA,NA,NA,NA,NA,NA,NA,NA
+marine,consumer,8.9,11.7,NA,Phoca hispida hispida,27,NA,NA,NA,NA,NA,NA,NA,NA
+marine,consumer,9.4,11,NA,Phoca hispida hispida,27,NA,NA,NA,NA,NA,NA,NA,NA
+marine,consumer,7.1,11.9,NA,Phoca hispida hispida,27,NA,NA,NA,NA,NA,NA,NA,NA
+marine,consumer,9,10.9,NA,Phoca hispida hispida,27,NA,NA,NA,NA,NA,NA,NA,NA
+marine,consumer,7.2,12.2,NA,Phoca hispida hispida,27,NA,NA,NA,NA,NA,NA,NA,NA
+marine,consumer,6.1,6.2,NA,Phoca hispida botnica,27,NA,NA,NA,NA,NA,NA,NA,NA
+marine,consumer,7.4,8.6,NA,Phoca hispida botnica,27,NA,NA,NA,NA,NA,NA,NA,NA
+marine,consumer,8,9.7,NA,Phoca hispida botnica,27,NA,NA,NA,NA,NA,NA,NA,NA
+marine,consumer,7.4,9.3,NA,Phoca hispida botnica,27,NA,NA,NA,NA,NA,NA,NA,NA
+marine,consumer,7.4,9.7,NA,Phoca hispida botnica,27,NA,NA,NA,NA,NA,NA,NA,NA
+marine,consumer,8.5,10.5,NA,Phoca hispida botnica,27,NA,NA,NA,NA,NA,NA,NA,NA
+marine,consumer,9.2,10.5,NA,Phoca hispida botnica,27,NA,NA,NA,NA,NA,NA,NA,NA
+marine,consumer,5.9,11.1,NA,Phoca hispida botnica,27,NA,NA,NA,NA,NA,NA,NA,NA
+marine,consumer,8.4,9.9,NA,Phoca hispida botnica,27,NA,NA,NA,NA,NA,NA,NA,NA
+marine,consumer,5.8,10.7,NA,Phoca hispida botnica,27,NA,NA,NA,NA,NA,NA,NA,NA
+freshwater,consumer,1.9,3,NA,Lutra lutra,27,NA,NA,NA,NA,NA,NA,NA,NA
+freshwater,consumer,1.9,2.8,NA,Lutra lutra,27,NA,NA,NA,NA,NA,NA,NA,NA
+freshwater,consumer,2,3,NA,Lutra lutra,27,NA,NA,NA,NA,NA,NA,NA,NA
+freshwater,consumer,2.1,3.4,NA,Lutra lutra,27,NA,NA,NA,NA,NA,NA,NA,NA
+freshwater,consumer,2.4,3.9,NA,Lutra lutra,27,NA,NA,NA,NA,NA,NA,NA,NA
+freshwater,consumer,2.6,4.1,NA,Lutra lutra,27,NA,NA,NA,NA,NA,NA,NA,NA
+freshwater,consumer,2.4,3.9,NA,Lutra lutra,27,NA,NA,NA,NA,NA,NA,NA,NA
+terrestrial,consumer,0.5,0.8,NA,Nyctereutes procynoides,27,NA,NA,NA,NA,NA,NA,NA,NA
+terrestrial,consumer,0.6,1,NA,Nyctereutes procynoides,27,NA,NA,NA,NA,NA,NA,NA,NA
+terrestrial,consumer,0.7,1.4,NA,Nyctereutes procynoides,27,NA,NA,NA,NA,NA,NA,NA,NA
+terrestrial,consumer,0.6,1.4,NA,Nyctereutes procynoides,27,NA,NA,NA,NA,NA,NA,NA,NA
+terrestrial,consumer,0.7,1.5,NA,Nyctereutes procynoides,27,NA,NA,NA,NA,NA,NA,NA,NA
+terrestrial,consumer,0.6,1.4,NA,Nyctereutes procynoides,27,NA,NA,NA,NA,NA,NA,NA,NA
+terrestrial,consumer,0.5,1.8,NA,Nyctereutes procynoides,27,NA,NA,NA,NA,NA,NA,NA,NA
+terrestrial,consumer,0.1,0.1,NA,Urus arctos,27,NA,NA,NA,NA,NA,NA,NA,NA
+terrestrial,consumer,0.1,0.1,NA,Urus arctos,27,NA,NA,NA,NA,NA,NA,NA,NA
+terrestrial,consumer,0.2,0.1,NA,Canis lupus,27,NA,NA,NA,NA,NA,NA,NA,NA
+terrestrial,consumer,0.2,0.2,NA,Canis lupus,27,NA,NA,NA,NA,NA,NA,NA,NA
+terrestrial,consumer,0.1,0,NA,Castor canadensis,28,NA,NA,NA,NA,NA,NA,NA,NA
+terrestrial,consumer,0,0,NA,Castor canadensis,28,NA,NA,NA,NA,NA,NA,NA,NA
+terrestrial,consumer,0.1,0,NA,Castor canadensis,28,NA,NA,NA,NA,NA,NA,NA,NA
+terrestrial,consumer,0.1,0,NA,Castor canadensis,28,NA,NA,NA,NA,NA,NA,NA,NA
+terrestrial,consumer,0,0,NA,Castor canadensis,28,NA,NA,NA,NA,NA,NA,NA,NA
+terrestrial,consumer,0.1,0,NA,Castor fiber,28,NA,NA,NA,NA,NA,NA,NA,NA
+terrestrial,consumer,0.1,0,NA,Castor fiber,28,NA,NA,NA,NA,NA,NA,NA,NA
+terrestrial,consumer,0.1,0,NA,Castor fiber,28,NA,NA,NA,NA,NA,NA,NA,NA
+terrestrial,consumer,0.2,0.5,NA,Ondatra zibethicus,28,NA,NA,NA,NA,NA,NA,NA,NA
+terrestrial,consumer,0.2,0.5,NA,Ondatra zibethicus,28,NA,NA,NA,NA,NA,NA,NA,NA
+terrestrial,consumer,0.1,0.4,NA,Ondatra zibethicus,28,NA,NA,NA,NA,NA,NA,NA,NA
+terrestrial,consumer,0.2,1.7,NA,Ondatra zibethicus,28,NA,NA,NA,NA,NA,NA,NA,NA
+terrestrial,consumer,0.2,1.6,NA,Ondatra zibethicus,28,NA,NA,NA,NA,NA,NA,NA,NA

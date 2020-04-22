@@ -195,14 +195,17 @@ dataset28_raw <- read_csv("data-raw/28-Kakela-Hyvarinen-1996b.csv") %>%
 	rename(epa = percent_20_5n3_epa) %>% 
 	rename(group = trophic_position) %>% 
 	select(species, dha, epa, ecosystem, group) %>% 
-	mutate(source_dataset = "28")
+	mutate(source_dataset = "28") %>% 
+	mutate(dha = ifelse(dha == "trace", 0, dha)) %>% 
+	mutate(epa = ifelse(epa == "trace", 0, epa)) %>% 
+	filter(!is.na(dha))
 
 
 all_data <- bind_rows(dataset2_raw, dataset4_raw, dataset5_raw, dataset1a_raw, dataset1b_raw,
 					  dataset6_raw, dataset7_raw, dataset15_raw,
 					  dataset16_raw, dataset19_raw, dataset22_raw,
 					  dataset20_raw, dataset17_raw, dataset21_raw, dataset23_raw,
-					  dataset24_raw, dataset25_raw, dataset26_raw)
+					  dataset24_raw, dataset25_raw, dataset26_raw, dataset27_raw)
 
 
 
@@ -215,10 +218,14 @@ all_data <- read_csv("data-processed/all_data.csv") %>%
 	mutate(group = ifelse(group == "primary producer", "primary_producer", group))
 
 all_data %>% 
+	filter(!is.na(ecosystem)) %>% 
+	mutate(ecosystem = ifelse(ecosystem == "littoral", "freshwater", ecosystem)) %>% 
 	ggplot(aes(x = dha, fill = ecosystem)) + geom_histogram() +
-	facet_wrap(ecosystem ~ group, scales = "free_y")
+	facet_grid(ecosystem ~ group, scales = "free_y")
 
-all_data %>% 
+ggsave("figures/all-dha-ecosystems.pdf", width = 10, height = 8)
+
+	all_data %>% 
 	filter(ecosystem == "freshwater", group == "consumer") %>% View
 
 
