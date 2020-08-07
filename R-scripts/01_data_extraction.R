@@ -229,7 +229,14 @@ library(taxize)
 
 all_data <- read_csv("data-processed/all_data.csv") %>% 
 	mutate(group = ifelse(group == "primary producer", "primary_producer", group)) %>% 
-	mutate(genus_species = paste(genus, species, sep = " "))
+	mutate(genus_species = paste(genus, species, sep = " ")) %>% 
+	select(genus_species, everything())
+
+taxa <- data.frame(taxa = paste(all_data$genus, all_data$species)) ## create dataframe of names to check
+
+syns <- unique(taxa)
+tsn_search <- get_tsn(as.character(syns$taxa), accepted = FALSE) ## find tsn for each unique taxa
+
 
 all_data <- read_csv("data-processed/all_data.csv") %>% 
 	mutate(group = ifelse(group == "primary producer", "primary_producer", group)) %>% 
@@ -303,5 +310,6 @@ ggsave("figures/all-dha-ecosystems.png", width = 12, height = 6)
 
 
 
+tsn_search
 
 
