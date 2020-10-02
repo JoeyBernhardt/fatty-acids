@@ -14,6 +14,7 @@ library(tidyverse)
 library(taxize)
 library(readxl)
 library(janitor)
+library(ggridges)
 
 
 fa <- read_excel("data-processed/FA-Evol-Dataset.xlsx") %>% 
@@ -320,3 +321,313 @@ p1 <-
 	scale_fill_manual(values=custom.color)+
 	xlim(0, 50)+
 	theme(legend.position="none")
+
+
+
+# trying with the gnr resolve ---------------------------------------------
+library(tidyverse)
+library(taxize)
+specieslist <- unique(producers$genus)
+
+result.itis <- specieslist %>%
+	gnr_resolve(data_source_ids = c(3), 
+				with_canonical_ranks=T)
+
+
+itis_tax_output <- classification(result.itis$matched_name2, db = 'itis')
+outputlst <- itis_tax_output
+
+taxdata7 <- data.frame()
+for(x in 1:length(outputlst)){
+	tryCatch({
+		kingdom=filter(outputlst[[x]], rank =="kingdom")$name
+		phylum=filter(outputlst[[x]], rank =="phylum")$name
+		class=filter(outputlst[[x]], rank =="class")$name
+		order=filter(outputlst[[x]], rank =="order")$name
+		family=filter(outputlst[[x]], rank =="family")$name
+		genus=filter(outputlst[[x]], rank =="genus")$name
+		species=filter(outputlst[[x]], rank =="species")$name
+		
+		row <- data.frame(cbind(kingdom = kingdom, phylum=phylum,class=class,order=order,family=family,genus=genus, species = species))
+		taxdata7 <- bind_rows(taxdata7, row)    
+	}, error=function(e){cat("ERROR :",conditionMessage(e), "\n")})
+}
+
+taxdata7 %>% View
+
+p2 <- producers %>% 
+	select(fa_id, ecosystem, trophic_position, genus, species, dha, epa, ala) %>% 
+	left_join(., result.itis, by = c("genus" = "user_supplied_name")) 
+
+unmatched <- p2 %>% 
+	filter(is.na(matched_name2))
+
+producers %>% 
+	filter(fa_id %in% unmatched$fa_id) %>% View ### ok these are mostly algae it seems
+
+gnr_datasources() %>% View
+unmatched_species <- unique(unmatched$genus)
+
+result.ncbi <- unmatched_species %>%
+	gnr_resolve(data_source_ids = c(9), 
+				with_canonical_ranks=T)
+
+p3 <- p2 %>% 
+	filter(fa_id %in% unmatched$fa_id) %>% 
+	select(-submitted_name, -data_source_title, -score, - matched_name2)
+
+p4 <- p3 %>% 
+	left_join(., result.worms, by = c("genus" = "user_supplied_name"))
+
+still_unmatched <- p4 %>% 
+	filter(is.na(matched_name2))
+
+write_csv(still_unmatched, "data-processed/unmatched-genera.csv")
+
+still_unmatched_species <- unique(still_unmatched$genus)
+
+result.col <- still_unmatched_species %>% 
+	gnr_resolve(data_source_ids = c(1), 
+				with_canonical_ranks=T)
+
+p5 <- still_unmatched %>% 
+	select(-submitted_name, -data_source_title, -score, - matched_name2) %>% 
+	left_join(., result.col,  by = c("genus" = "user_supplied_name")) %>% 
+	filter(!is.na(submitted_name))
+
+actually_unmatched <- still_unmatched %>% 
+	select(-submitted_name, -data_source_title, -score, - matched_name2) %>% 
+	left_join(., result.col,  by = c("genus" = "user_supplied_name")) %>% 
+	filter(is.na(submitted_name))
+
+write_csv(actually_unmatched, "data-processed/actually-unmatched-genera.csv")
+
+
+### ok now let's gather them all 
+
+edited_unmatched <- read_csv("data-processed/actually-unmatched-genera-edited.csv")
+g2 <- unique(edited_unmatched$googled_genus)
+
+result.col2 <- g2 %>% 
+	gnr_resolve(data_source_ids = c(1), 
+				with_canonical_ranks=T)
+
+edited2 <- edited_unmatched %>% 
+	select(-submitted_name, -data_source_title, -score, - matched_name2) %>% 
+	left_join(result.col2, by = c("googled_genus" = "user_supplied_name"))
+
+
+### ok now let's gather them all, gather the genus and fa_id column, then merge back with the producers data
+
+e2 <- edited2 %>% 
+	select(fa_id, matched_name2) %>% 
+	filter(!is.na(matched_name2)) %>% 
+	distinct() %>% 
+	mutate(fa_id = as.character(fa_id))
+
+p4b <- p4 %>% 
+	select(fa_id, matched_name2) %>% 
+	filter(!is.na(matched_name2)) %>% 
+	distinct() %>% 
+	mutate(fa_id = as.character(fa_id))
+
+p2b <- p2 %>% 
+	select(fa_id, matched_name2) %>% 
+	filter(!is.na(matched_name2)) %>% 
+	distinct() %>% 
+	mutate(fa_id = as.character(fa_id))
+
+all_genera <- bind_rows(e2, p4b, p2b) %>% 
+	distinct()
+
+
+producers2 <- producers %>% 
+	left_join(all_genera)
+
+producers3 <- producers2 %>% 
+	mutate(genus_matched = ifelse(is.na(matched_name2), genus, matched_name2))
+
+prod_tax <- taxdata7 %>% 
+	filter(kingdom != "Animalia")
+
+producers4 <- producers3 %>% 
+	left_join(., prod_tax, by = "genus") %>% 
+	rename(class = class.y,
+		   order = order.y,
+		   family = family.y,
+		   phylum = phylum.y) %>% 
+	select(-contains(".x"))
+write_csv(producers4, "data-processed/producers-genus-cleaned.csv")
+
+producers4_cleaned <- read_excel("data-processed/producers-genus-cleaned-edited.xlsx")
+producers4_cleaned <- read_csv("data-processed/producers-genus-cleaned-edited.csv") %>% 
+	select(-original_study, -data_from)
+
+# update sep 30 with cleaned up data from lily ----------------------------
+
+new_prod <- read_excel("data-processed/producers-genus-cleaned_edrefs.xlsx") %>% 
+	select(fa_id, original_study, data_from)
+
+prod4_c2 <- producers4_cleaned %>% 
+	filter(fa_id %in% c(new_prod$fa_id)) %>%
+	left_join(., new_prod) %>% 
+	distinct()
+
+
+
+
+
+prod5 <- prod4_c2 %>% 
+	# producers4_cleaned %>% 
+	filter(identified_to_genus != "no") %>%
+	# mutate(matched_name2 = ifelse(is.na(matched_name2), hand_edited_genus, matched_name2)) %>%
+	# filter(matched_name2 != genus_matched) %>%
+	gather(key = fa, value = concentration, epa, dha, ala) %>% 
+	filter(!is.na(concentration)) %>% 
+	mutate(concentration = as.numeric(concentration)) %>%
+	group_by(kingdom, order, family, class, genus_matched, fa, ecosystem) %>% 
+	summarise_each(funs(mean), concentration) %>% 
+	filter(!is.na(genus_matched))
+
+library(ggplot2)
+library(ggridges)
+
+length(unique(prod5$genus_matched))
+
+write_csv(prod5, "data-processed/prod5-update-sep2020.csv")
+
+
+## Diploschistes is a lichen, Peltigera, Anaptychia, Umbilicaria
+## Ctenidium is a moss, Fontinalis, Dichodontium, Tortella, Pogonatum
+
+
+prod6 <- prod5 %>% 
+	rename(mean_concentration = concentration) %>% 
+	mutate(moss = ifelse(genus_matched %in% c("Ctenidium", "Fontinalis", "Dichodontium", "Tortella", "Pogonatum"), "yes", "no")) %>% 
+	mutate(lichen = ifelse(genus_matched %in% c("Diploschistes", "Peltigera", "Anaptychia", "Umbilicaria"), "yes", "no")) 
+
+### some stats
+
+prod6b <- prod6 %>% 
+	mutate(fa_count = 1000* concentration)
+dha <- prod6b %>% 
+	filter(fa == "dha") %>% 
+	mutate(offset = 1000)
+mod1 <- glm(fa_count  ~ ecosystem + offset(log(offset)), family=quasipoisson, data = dha)
+mod2 <- glm(fa_count  ~ ecosystem + offset(log(offset)), family=quasipoisson, data = dha)
+mod3 <- glm(fa_count ~ ecosystem,family=tweedie(var.power= 1,link.power=1), data = dha)
+summary(mod2)
+summary(mod3)
+visreg(mod2)
+
+epa <- prod6b %>% 
+	filter(fa == "ala") %>% 
+	mutate(offset = 1000)
+mod2 <- glm(fa_count  ~ ecosystem + offset(log(offset)), family=quasipoisson, data = epa)
+mod3 <- glm(fa_count ~ ecosystem,family=tweedie(var.power= 1,link.power=1), data = epa)
+summary(mod3)
+summary(mod2)
+visreg(mod3)
+visreg(mod2)
+library(visreg)
+library(tweedie)
+library(statmod)
+
+summary(mod2)
+anova(mod1)
+
+
+mosses <- prod6 %>% 
+	filter(moss == "yes") %>% 
+	filter(fa != "ala")
+	
+
+lichens <- prod6 %>% 
+	filter(lichen == "yes") %>% 
+	filter(fa != "ala")
+	
+	prd_plot <- prod6 %>% 
+	ggplot(aes(x= concentration, y=ecosystem, fill=ecosystem))+
+		geom_density_ridges(color = "white") +
+	theme_ridges() +
+	# geom_point(aes(x = concentration, y = 3.1), data = mosses, shape = 6, size = 2, color = "coral") +
+	# 	geom_point(aes(x = concentration, y = 3.1), data = lichens, shape = 6, size = 2, color =  "coral") +
+	xlim(0, 75)+
+	scale_fill_manual(values = c( "aquamarine3", "cornflowerblue", "darkolivegreen4")) +
+	theme(legend.position="none") + facet_wrap( ~ fa) +
+		theme(strip.text.x = element_text(size=0)) + 
+		ylab("") + xlab("")
+ggsave("figures/producers-genus.pdf", width = 6, height = 3)
+write_csv(prod6, "data-processed/fa-producers-finest-taxonomic-resolution.csv")
+
+consumers <- read_excel("data-processed/FA-Evol-Dataset_ConsumerEdit3.xlsx", sheet = "Tiss Avg REd")
+
+con2 <- consumers %>% 
+	gather(key = fa, value = concentration, ala, epa, dha) %>% 
+	mutate(concentration = as.numeric(concentration)) %>%
+	filter(!is.na(concentration)) %>% 
+	mutate(Class = as.character(Class)) %>% 
+	mutate(Class = factor(Class, levels = c("Polychaeta", "Clitellata", "Cephalopoda", "Gastropoda",
+											"Bivalvia", "Malacostraca", "Hexanauplia", "Branchiopoda", "Insecta", "Echinoidea",
+											"Holothuroidea", "Ophiurodea", "Asteroidea", "Chondrichthyes", "Actinopterygii",
+											"Amphibia", "Mammalia", "Aves"))) %>%
+	mutate(Class = fct_rev(Class)) %>% 
+	filter(trophic_position != "Producer") %>% 
+	filter(!is.na(Class))
+
+library(taxize)
+con3 <- con2 %>%
+	separate(col = species, into = c("genus", "species1"), remove = FALSE, sep = " ")
+
+#### find consumer names
+gnr_datasources() %>% View
+result.cons <- unique(con3$genus) %>%
+	gnr_resolve(data_source_ids = c(1), 
+				with_canonical_ranks=T)
+
+result.cons11 <- unique(con3$genus) %>%
+	gnr_resolve(data_source_ids = c(11), 
+				with_canonical_ranks=T)
+
+con4 <- con3 %>%
+	left_join(result.cons11, by = c("genus" = "user_supplied_name"))
+
+
+length(unique(con3$genus))
+
+con_plot <- 
+	
+	con5 <- con4 %>% 
+	mutate(finest_taxon = ifelse(is.na(matched_name2), species, matched_name2)) %>% 
+	mutate(finest_taxon = ifelse(is.na(finest_taxon), Family, finest_taxon)) %>% 
+	mutate(Class_car = as.character(Class)) %>% 
+	mutate(finest_taxon = ifelse(is.na(finest_taxon), Class_car, finest_taxon)) %>% 
+	select(finest_taxon, matched_name2, species, everything()) %>%
+	group_by(Class, ecosystem, finest_taxon, fa) %>% 
+	summarise(mean_concentration = mean(concentration)) 
+write_csv(con5, "data-processed/fa-consumers-finest-taxonomic-resolution.csv")
+
+View(con5)
+
+con_plot <- con5 %>% 
+	filter(Class != "Echinoidea") %>% 
+	ggplot(aes(x = mean_fa, y = Class, fill = ecosystem)) +
+	geom_density_ridges(color = "white") +
+	theme_ridges() +
+		scale_fill_manual(values = c( "aquamarine3", "cornflowerblue", "darkolivegreen4")) +
+		theme(legend.position="none") + facet_wrap( ~ fa) +
+		theme(strip.text.x = element_text(size=0)) + 
+	theme(text = element_text(size=20)) +
+		ylab("") + xlab("") +
+	xlim(0, 75)
+ggsave("figures/consumers-genus.pdf", width = 6, height = 3)
+
+library(patchwork)
+
+p <- prd_plot / con_plot +
+	plot_layout(heights = c(1, 5)) 
+ggsave('figures/figure2-cons-genus-sep2020.pdf', p, width = 10, height = 12)
+
+
+
+
