@@ -1,0 +1,11 @@
+genus_matched,fa,ecosystem,mean_concentration,moss,lichen,kingdom,class,order,family,species,phylum
+Galeopsis,ala,Terrestrial,9.1,no,no,Animalia,Gymnolaemata,Cheilostomata,Celleporidae,NA,Bryozoa
+Heterostigma,ala,Marine,3.25,no,no,Animalia,Ascidiacea,Pleurogona,Pyuridae,NA,Chordata
+Heterostigma,dha,Marine,2.55,no,no,Animalia,Ascidiacea,Pleurogona,Pyuridae,NA,Chordata
+Heterostigma,epa,Marine,14,no,no,Animalia,Ascidiacea,Pleurogona,Pyuridae,NA,Chordata
+Phaeomonas,ala,Marine,0,no,no,Chromista,Pinguiophyceae,Pinguiochrysidales,Pinguiochrysidaceae,NA,Ochrophyta
+Phaeomonas,dha,Marine,11,no,no,Chromista,Pinguiophyceae,Pinguiochrysidales,Pinguiochrysidaceae,NA,Ochrophyta
+Phaeomonas,epa,Marine,56,no,no,Chromista,Pinguiophyceae,Pinguiochrysidales,Pinguiochrysidaceae,NA,Ochrophyta
+Pterygophora,ala,Marine,9.62,no,no,Chromista,Phaeophyceae,ÊLaminariales,Alariaceae,NA,Ochrophyta
+Pterygophora,dha,Marine,0.1,no,no,Chromista,Phaeophyceae,ÊLaminariales,Alariaceae,NA,Ochrophyta
+Pterygophora,epa,Marine,14.67,no,no,Chromista,Phaeophyceae,ÊLaminariales,Alariaceae,NA,Ochrophyta

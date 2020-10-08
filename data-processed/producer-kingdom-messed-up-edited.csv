@@ -1,0 +1,11 @@
+genus_matched,fa,ecosystem,mean_concentration,moss,lichen,kingdom,class,order,family,species,phylum
+Galeopsis,ala,Terrestrial,9.1,no,no,Plantae,Magnoliopsida,Lamiales,Lamiaceae,NA,Spermatophyta
+Heterosigma,ala,Marine,3.25,no,no,Chromista,Raphidophyceae,Chattonellales,Chattonellaceae,NA,Ochrophyta
+Heterosigma,dha,Marine,2.55,no,no,Chromista,Raphidophyceae,Chattonellales,Chattonellaceae,NA,Ochrophyta
+Heterosigma,epa,Marine,14,no,no,Chromista,Raphidophyceae,Chattonellales,Chattonellaceae,NA,Ochrophyta
+Phaeomonas,ala,Marine,0,no,no,Chromista,Pinguiophyceae,Pinguiochrysidales,Pinguiochrysidaceae,NA,Ochrophyta
+Phaeomonas,dha,Marine,11,no,no,Chromista,Pinguiophyceae,Pinguiochrysidales,Pinguiochrysidaceae,NA,Ochrophyta
+Phaeomonas,epa,Marine,56,no,no,Chromista,Pinguiophyceae,Pinguiochrysidales,Pinguiochrysidaceae,NA,Ochrophyta
+Pterygophora,ala,Marine,9.62,no,no,Chromista,Phaeophyceae,Laminariales,Alariaceae,NA,Ochrophyta
+Pterygophora,dha,Marine,0.1,no,no,Chromista,Phaeophyceae,Laminariales,Alariaceae,NA,Ochrophyta
+Pterygophora,epa,Marine,14.67,no,no,Chromista,Phaeophyceae,Laminariales,Alariaceae,NA,Ochrophyta

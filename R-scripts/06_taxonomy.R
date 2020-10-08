@@ -506,35 +506,6 @@ prod6 <- prod5 %>%
 	mutate(moss = ifelse(genus_matched %in% c("Ctenidium", "Fontinalis", "Dichodontium", "Tortella", "Pogonatum"), "yes", "no")) %>% 
 	mutate(lichen = ifelse(genus_matched %in% c("Diploschistes", "Peltigera", "Anaptychia", "Umbilicaria"), "yes", "no")) 
 
-### some stats
-
-prod6b <- prod6 %>% 
-	mutate(fa_count = 1000* concentration)
-dha <- prod6b %>% 
-	filter(fa == "dha") %>% 
-	mutate(offset = 1000)
-mod1 <- glm(fa_count  ~ ecosystem + offset(log(offset)), family=quasipoisson, data = dha)
-mod2 <- glm(fa_count  ~ ecosystem + offset(log(offset)), family=quasipoisson, data = dha)
-mod3 <- glm(fa_count ~ ecosystem,family=tweedie(var.power= 1,link.power=1), data = dha)
-summary(mod2)
-summary(mod3)
-visreg(mod2)
-
-epa <- prod6b %>% 
-	filter(fa == "ala") %>% 
-	mutate(offset = 1000)
-mod2 <- glm(fa_count  ~ ecosystem + offset(log(offset)), family=quasipoisson, data = epa)
-mod3 <- glm(fa_count ~ ecosystem,family=tweedie(var.power= 1,link.power=1), data = epa)
-summary(mod3)
-summary(mod2)
-visreg(mod3)
-visreg(mod2)
-library(visreg)
-library(tweedie)
-library(statmod)
-
-summary(mod2)
-anova(mod1)
 
 
 mosses <- prod6 %>% 
@@ -547,7 +518,8 @@ lichens <- prod6 %>%
 	filter(fa != "ala")
 	
 	prd_plot <- prod6 %>% 
-	ggplot(aes(x= concentration, y=ecosystem, fill=ecosystem))+
+		mutate(fa = factor(fa, levels = c("ala", "epa", "dha"))) %>% 
+	ggplot(aes(x= mean_concentration, y=ecosystem, fill=ecosystem))+
 		geom_density_ridges(color = "white") +
 	theme_ridges() +
 	# geom_point(aes(x = concentration, y = 3.1), data = mosses, shape = 6, size = 2, color = "coral") +
@@ -575,6 +547,8 @@ con2 <- consumers %>%
 	filter(trophic_position != "Producer") %>% 
 	filter(!is.na(Class))
 
+View(con2)
+
 library(taxize)
 con3 <- con2 %>%
 	separate(col = species, into = c("genus", "species1"), remove = FALSE, sep = " ")
@@ -593,25 +567,77 @@ con4 <- con3 %>%
 	left_join(result.cons11, by = c("genus" = "user_supplied_name"))
 
 
-length(unique(con3$genus))
-
-con_plot <- 
 	
 	con5 <- con4 %>% 
 	mutate(finest_taxon = ifelse(is.na(matched_name2), species, matched_name2)) %>% 
-	mutate(finest_taxon = ifelse(is.na(finest_taxon), Family, finest_taxon)) %>% 
+	mutate(finest_taxon = ifelse(is.na(finest_taxon), Family, finest_taxon)) %>%
+	select(Phylum, Class, Order, Family, genus, finest_taxon, everything()) %>% 
 	mutate(Class_car = as.character(Class)) %>% 
+	mutate(finest_taxon = ifelse(is.na(finest_taxon), Order, finest_taxon)) %>% 
 	mutate(finest_taxon = ifelse(is.na(finest_taxon), Class_car, finest_taxon)) %>% 
-	select(finest_taxon, matched_name2, species, everything()) %>%
-	group_by(Class, ecosystem, finest_taxon, fa) %>% 
-	summarise(mean_concentration = mean(concentration)) 
+	select(finest_taxon, matched_name2, species, everything()) %>% 
+	mutate(finest_taxon = ifelse(genus == "Grazers", Order, finest_taxon)) %>% 
+	mutate(genus = ifelse(genus == "Grazers", NA, genus)) %>% 
+	group_by(Phylum, Class, Order, Family, genus, ecosystem, finest_taxon, fa) %>% 
+	summarise(mean_concentration = mean(concentration)) %>% 
+	mutate(Kingdom = "Animalia") %>% 
+	select(Kingdom, Phylum, Class, Order, Family, genus, everything()) %>% 
+		ungroup() %>% 
+		rename(genus_or_finest_taxon = genus)
+	
+	con5a <- con4 %>% 
+		mutate(finest_taxon = ifelse(is.na(matched_name2), species, matched_name2)) %>% 
+		mutate(finest_taxon = ifelse(is.na(finest_taxon), Family, finest_taxon)) %>%
+		select(Phylum, Class, Order, Family, genus, finest_taxon, everything()) %>% 
+		mutate(Class_car = as.character(Class)) %>% 
+		mutate(finest_taxon = ifelse(is.na(finest_taxon), Order, finest_taxon)) %>% 
+		mutate(finest_taxon = ifelse(is.na(finest_taxon), Class_car, finest_taxon)) %>% 
+		select(finest_taxon, matched_name2, species, everything()) %>% 
+		mutate(finest_taxon = ifelse(genus == "Grazers", Order, finest_taxon)) %>% 
+		mutate(genus = ifelse(genus == "Grazers", NA, genus)) 
+	
+	
+	con5b <- con4 %>% 
+		mutate(finest_taxon = ifelse(is.na(matched_name2), species, matched_name2)) %>% 
+		mutate(finest_taxon = ifelse(is.na(finest_taxon), Family, finest_taxon)) %>%
+		select(Phylum, Class, Order, Family, genus, finest_taxon, everything()) %>% 
+		mutate(Class_car = as.character(Class)) %>% 
+		mutate(finest_taxon = ifelse(is.na(finest_taxon), Order, finest_taxon)) %>% 
+		mutate(finest_taxon = ifelse(is.na(finest_taxon), Class_car, finest_taxon)) %>% 
+		select(finest_taxon, matched_name2, species, everything()) %>% 
+		mutate(finest_taxon = ifelse(genus == "Grazers", Order, finest_taxon)) %>% 
+		mutate(genus = ifelse(genus == "Grazers", NA, genus)) %>% 
+		group_by(finest_taxon, fa) %>% 
+		summarise(mean_concentration = mean(concentration))
+	
+	con5c <- left_join(con5b, con5a) %>% 
+		mutate(Kingdom = "Animalia") %>% 
+		ungroup() %>% 
+		rename(genus_or_finest_taxon = genus) %>% 
+		mutate(Class = as.character(Class)) %>% 
+		select(Kingdom, Phylum, Class, Order, Family, finest_taxon, genus_or_finest_taxon, fa, concentration) %>% 
+		mutate(finest_taxon = ifelse(is.na(finest_taxon), Family, finest_taxon)) %>%
+		mutate(finest_taxon = ifelse(is.na(finest_taxon), Order, finest_taxon)) %>% 
+		mutate(finest_taxon = ifelse(is.na(finest_taxon), Class, finest_taxon)) %>% View
+		
+	
+	
+	
+	
 write_csv(con5, "data-processed/fa-consumers-finest-taxonomic-resolution.csv")
+
+
+con5 %>% 
+	filter(Class == finest_taxon) %>% View
+	select(Class, finest_taxon, everything()) %>% View
+
 
 View(con5)
 
 con_plot <- con5 %>% 
 	filter(Class != "Echinoidea") %>% 
-	ggplot(aes(x = mean_fa, y = Class, fill = ecosystem)) +
+	mutate(fa = factor(fa, levels = c("ala", "epa", "dha"))) %>% 
+	ggplot(aes(x = mean_concentration, y = Class, fill = ecosystem)) +
 	geom_density_ridges(color = "white") +
 	theme_ridges() +
 		scale_fill_manual(values = c( "aquamarine3", "cornflowerblue", "darkolivegreen4")) +
@@ -630,4 +656,107 @@ ggsave('figures/figure2-cons-genus-sep2020.pdf', p, width = 10, height = 12)
 
 
 
+# filling in missing higher order taxonomy for producers ------------------
 
+prod7 <- read_csv("data-processed/fa-producers-finest-taxonomic-resolution.csv")
+
+
+### argania, aizoon, Candidatus
+no_king <- prod7 %>% 
+	filter(is.na(kingdom))
+
+
+itis_tax_output2 <- classification(no_king$genus_matched, db = 'itis')
+outputlst <- itis_tax_output2
+
+taxdata7 <- data.frame()
+for(x in 1:length(outputlst)){
+	tryCatch({
+		kingdom=filter(outputlst[[x]], rank =="kingdom")$name
+		phylum=filter(outputlst[[x]], rank =="phylum")$name
+		class=filter(outputlst[[x]], rank =="class")$name
+		order=filter(outputlst[[x]], rank =="order")$name
+		family=filter(outputlst[[x]], rank =="family")$name
+		genus=filter(outputlst[[x]], rank =="genus")$name
+		species=filter(outputlst[[x]], rank =="species")$name
+		
+		row <- data.frame(cbind(kingdom = kingdom, phylum=phylum,class=class,order=order,family=family,genus=genus, species = species))
+		taxdata7 <- bind_rows(taxdata7, row)    
+	}, error=function(e){cat("ERROR :",conditionMessage(e), "\n")})
+}
+
+taxdata7 %>% View
+
+taxda
+
+library(taxadb)
+
+id1 <- get_ids("Reynoutria baldschuanica") 
+filter_name("Reynoutria", provider = "col") %>% View
+td_create()
+td_create("col")
+
+
+king_new <- no_king %>% 
+	select(-kingdom, -order, -class, -family) %>% 
+	left_join(., taxdata7, by = c("genus_matched" = "genus"))  %>% 
+	distinct() %>% 
+	filter(kingdom != "Animalia")
+
+king_animals <- no_king %>% 
+	select(-kingdom, -order, -class, -family) %>% 
+	left_join(., taxdata7, by = c("genus_matched" = "genus"))  %>% 
+	distinct() %>% 
+	filter(kingdom == "Animalia")
+
+king_animals2 <- king_animals %>% 
+	mutate(genus_matched = ifelse(genus_matched == "Pteridophora", "Pterygophora", genus_matched)) %>% 
+	mutate(genus_matched = ifelse(genus_matched == "Phaenomonas", "Phaeomonas", genus_matched)) 
+
+write_csv(king_animals2, "data-processed/producer-kingdom-messed-up.csv")
+
+king_animals_corr <- read_csv("data-processed/producer-kingdom-messed-up-edited.csv")
+
+king_new2 <- bind_rows(king_new, king_animals_corr)
+
+king <- prod7 %>% 
+	filter(!is.na(kingdom)) %>% 
+	bind_rows(king_new2) %>% 
+	select(-phylum, -species) %>% 
+	rename(genus = genus_matched) %>% 
+	select(kingdom, class, order, family, genus, everything())
+
+write_csv(king, "data-processed/fa-producers-finest-taxonomic-resolution-october.csv")
+
+
+prd_plot <- king %>% 
+	mutate(fa = factor(fa, levels = c("ala", "epa", "dha"))) %>% 
+	ggplot(aes(x= mean_concentration, y=ecosystem, fill=ecosystem))+
+	geom_density_ridges(color = "white") +
+	theme_ridges() +
+	# geom_point(aes(x = concentration, y = 3.1), data = mosses, shape = 6, size = 2, color = "coral") +
+	# 	geom_point(aes(x = concentration, y = 3.1), data = lichens, shape = 6, size = 2, color =  "coral") +
+	xlim(0, 75)+
+	scale_fill_manual(values = c( "aquamarine3", "cornflowerblue", "darkolivegreen4")) +
+	theme(legend.position="none") + facet_wrap( ~ fa) +
+	theme(strip.text.x = element_text(size=0)) + 
+	ylab("") + xlab("")
+
+con_plot <- con5 %>% 
+	filter(Class != "Echinoidea") %>% 
+	mutate(fa = factor(fa, levels = c("ala", "epa", "dha"))) %>% 
+	ggplot(aes(x = mean_concentration, y = Class, fill = ecosystem)) +
+	geom_density_ridges(color = "white") +
+	theme_ridges() +
+	scale_fill_manual(values = c( "aquamarine3", "cornflowerblue", "darkolivegreen4")) +
+	theme(legend.position="none") + facet_wrap( ~ fa) +
+	theme(strip.text.x = element_text(size=0)) + 
+	theme(text = element_text(size=20)) +
+	ylab("") + xlab("") +
+	xlim(0, 75)
+
+library(patchwork)
+
+p <- prd_plot / con_plot +
+	plot_layout(heights = c(1, 5)) 
+ggsave('figures/figure2-cons-genus-oct2020.pdf', p, width = 10, height = 12)
