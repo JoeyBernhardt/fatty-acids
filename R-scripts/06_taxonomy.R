@@ -618,13 +618,10 @@ con4 <- con3 %>%
 		select(Kingdom, Phylum, Class, Order, Family, finest_taxon, genus_or_finest_taxon, fa, concentration) %>% 
 		mutate(finest_taxon = ifelse(is.na(finest_taxon), Family, finest_taxon)) %>%
 		mutate(finest_taxon = ifelse(is.na(finest_taxon), Order, finest_taxon)) %>% 
-		mutate(finest_taxon = ifelse(is.na(finest_taxon), Class, finest_taxon)) %>% View
+		mutate(finest_taxon = ifelse(is.na(finest_taxon), Class, finest_taxon)) 
 		
 	
-	
-	
-	
-write_csv(con5, "data-processed/fa-consumers-finest-taxonomic-resolution.csv")
+	write_csv(con5c, "data-processed/fa-consumers-finest-taxonomic-resolution.csv")
 
 
 con5 %>% 
