@@ -1,6 +1,7 @@
 # fatty-acids
 
-This repository contains data and code for Twining et al. _in review_ 'The evolutionary ecology of fatty-acid variation: implications for consumer adaptation and diversification'.
+This repository contains data and code for Twining et al. _in review_ 'The evolutionary ecology of fatty-acid variation: implications for consumer adaptation and diversification'. It is archived for review purposes [![DOI](https://zenodo.org/badge/224154297.svg)](https://zenodo.org/badge/latestdoi/224154297).
+
 
 
 This repository is divided into the following folders: 
