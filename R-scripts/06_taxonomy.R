@@ -708,7 +708,9 @@ king <- prod7 %>%
 	bind_rows(king_new2) %>% 
 	select(-phylum, -species) %>% 
 	rename(genus = genus_matched) %>% 
-	select(kingdom, class, order, family, genus, everything())
+	select(kingdom, class, order, family, genus, everything()) %>% 
+	group_by(kingdom, class, order, family, genus, ecosystem, fa) %>% 
+	summarise(mean_concentration = mean(mean_concentration))
 
 write_csv(king, "data-processed/fa-producers-finest-taxonomic-resolution-october.csv")
 
