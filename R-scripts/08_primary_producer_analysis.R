@@ -27,7 +27,7 @@ dha <- producers %>%
 	mutate(mean_concentration = mean_concentration / 100)
 
 
-dha_n <- length(unique(dha$mean_concentration))
+dha_n <- length((dha$mean_concentration))
 
 dha2 <- dha %>% 
 	mutate(transformed_concentration = ((mean_concentration*(dha_n - 1)) + 0.5) / dha_n)
@@ -64,7 +64,7 @@ epa <- producers %>%
 	mutate(mean_concentration = mean_concentration / 100)
 
 
-epa_n <- length(unique(epa$mean_concentration))
+epa_n <- length((epa$mean_concentration))
 
 epa2 <- epa %>% 
 	mutate(transformed_concentration = ((mean_concentration*(epa_n - 1)) + 0.5) / epa_n)
@@ -94,7 +94,7 @@ ala <- producers %>%
 
 View(ala)
 
-ala_n <- length(unique(ala$mean_concentration))
+ala_n <- length((ala$mean_concentration))
 
 ala2 <- ala %>% 
 	mutate(transformed_concentration = ((mean_concentration*(ala_n - 1)) + 0.5) / ala_n)
