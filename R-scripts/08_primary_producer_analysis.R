@@ -36,12 +36,21 @@ dha2 <- dha %>%
 mod <- betareg(formula = transformed_concentration ~ ecosystem, data = dha2, link = "logit")
 summary(mod)
 
-
+#### look at the raw data
 dha2 %>% 
 	group_by(ecosystem) %>% 
 	summarise_each(funs(mean, std.error), mean_concentration) %>% 
 	ggplot(aes(x = ecosystem, y = mean)) +
 	geom_pointrange(aes(x = ecosystem, ymin = mean - std.error, ymax = mean + std.error))
+
+library(emmeans)
+library(multcompView)
+library(lsmeans)
+library(multcomp)
+
+marginal <-  emmeans(mod, ~ ecosystem)
+
+pairwise_comps <- pairs(marginal, adjust="tukey") ### don't get the same results as Ryan :( 
 
 
 # EPA ---------------------------------------------------------------------
