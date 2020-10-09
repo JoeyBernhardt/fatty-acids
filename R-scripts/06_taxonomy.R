@@ -618,15 +618,14 @@ con4 <- con3 %>%
 		select(Kingdom, Phylum, Class, Order, Family, finest_taxon, genus_or_finest_taxon, fa, concentration) %>% 
 		mutate(finest_taxon = ifelse(is.na(finest_taxon), Family, finest_taxon)) %>%
 		mutate(finest_taxon = ifelse(is.na(finest_taxon), Order, finest_taxon)) %>% 
-		mutate(finest_taxon = ifelse(is.na(finest_taxon), Class, finest_taxon)) 
+		mutate(finest_taxon = ifelse(is.na(finest_taxon), Class, finest_taxon)) %>% 
+		mutate(finest_taxon = ifelse(finest_taxon == "Oligocheata", "Oligochaeta", finest_taxon)) %>% 
+		mutate(genus_or_finest_taxon = ifelse(genus_or_finest_taxon == "Oligocheata", "Oligochaeta", genus_or_finest_taxon)) 
+		
 		
 	
 	write_csv(con5c, "data-processed/fa-consumers-finest-taxonomic-resolution.csv")
 
-
-con5 %>% 
-	filter(Class == finest_taxon) %>% View
-	select(Class, finest_taxon, everything()) %>% View
 
 
 View(con5)
