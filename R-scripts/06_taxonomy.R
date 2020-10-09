@@ -474,9 +474,6 @@ prod4_c2 <- producers4_cleaned %>%
 	distinct()
 
 
-
-
-
 prod5 <- prod4_c2 %>% 
 	# producers4_cleaned %>% 
 	filter(identified_to_genus != "no") %>%
@@ -615,7 +612,7 @@ con4 <- con3 %>%
 		ungroup() %>% 
 		rename(genus_or_finest_taxon = genus) %>% 
 		mutate(Class = as.character(Class)) %>% 
-		select(Kingdom, Phylum, Class, Order, Family, finest_taxon, genus_or_finest_taxon, fa, concentration) %>% 
+		select(Kingdom, Phylum, Class, Order, Family, finest_taxon, genus_or_finest_taxon, fa, concentration, ecosystem) %>% 
 		mutate(finest_taxon = ifelse(is.na(finest_taxon), Family, finest_taxon)) %>%
 		mutate(finest_taxon = ifelse(is.na(finest_taxon), Order, finest_taxon)) %>% 
 		mutate(finest_taxon = ifelse(is.na(finest_taxon), Class, finest_taxon)) %>% 
@@ -681,16 +678,7 @@ for(x in 1:length(outputlst)){
 	}, error=function(e){cat("ERROR :",conditionMessage(e), "\n")})
 }
 
-taxdata7 %>% View
 
-taxda
-
-library(taxadb)
-
-id1 <- get_ids("Reynoutria baldschuanica") 
-filter_name("Reynoutria", provider = "col") %>% View
-td_create()
-td_create("col")
 
 
 king_new <- no_king %>% 
@@ -730,8 +718,6 @@ prd_plot <- king %>%
 	ggplot(aes(x= mean_concentration, y=ecosystem, fill=ecosystem))+
 	geom_density_ridges(color = "white") +
 	theme_ridges() +
-	# geom_point(aes(x = concentration, y = 3.1), data = mosses, shape = 6, size = 2, color = "coral") +
-	# 	geom_point(aes(x = concentration, y = 3.1), data = lichens, shape = 6, size = 2, color =  "coral") +
 	xlim(0, 75)+
 	scale_fill_manual(values = c( "aquamarine3", "cornflowerblue", "darkolivegreen4")) +
 	theme(legend.position="none") + facet_wrap( ~ fa) +
