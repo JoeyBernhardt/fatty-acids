@@ -1,6 +1,13 @@
+---
+title: "primary-producer-analysis"
+output:
+  html_document: default
+  html_notebook: default
+---
 
 
 
+```{r}
 #### This script contains code used to answer the question: Do DHA, EPA and ALA concentrations in primary producers vary by ecosystem type?
 #### last updated by JB October 8 2020, adapted from code written by Ryan Shipley (any mistakes are JB's fault!)
 
@@ -9,18 +16,22 @@ library(tidyverse)
 library(plotrix)
 library(cowplot)
 theme_set(theme_cowplot())
+library(emmeans)
+library(multcompView)
+library(lsmeans)
+library(multcomp)
 
 
 ### The producer data here contain one observation per genus, per ecosystem, which is a genus-level average across studies, treatments etc.
 producers <- read_csv("data-processed/fa-producers-finest-taxonomic-resolution-october.csv") %>% 
 	filter(!is.na(mean_concentration))
-View(producers)
+```
 
 
-# DHA ---------------------------------------------------------------------
+```{r}
+Are DHA concentrations different among ecosystem types?
 
 
-### Are DHA concentrations different among ecosystem types?
 
 dha <- producers %>%
 	filter(fa == "dha") %>% 
@@ -35,23 +46,22 @@ dha2 <- dha %>%
 
 mod <- betareg(formula = transformed_concentration ~ ecosystem, data = dha2, link = "logit")
 summary(mod)
+```
 
-#### look at the raw data
+Look at the raw data
+```{r}
 dha2 %>% 
 	group_by(ecosystem) %>% 
 	summarise_each(funs(mean, std.error), mean_concentration) %>% 
 	ggplot(aes(x = ecosystem, y = mean)) +
 	geom_pointrange(aes(x = ecosystem, ymin = mean - std.error, ymax = mean + std.error))
 
-library(emmeans)
-library(multcompView)
-library(lsmeans)
-library(multcomp)
 
 marginal <-  emmeans(mod, ~ ecosystem)
 
 pairwise_comps <- pairs(marginal, adjust="tukey") ### don't get the same results as Ryan :( 
-
+pairwise_comps
+```
 
 # EPA ---------------------------------------------------------------------
 
@@ -80,9 +90,6 @@ epa2 %>%
 	ggplot(aes(x = ecosystem, y = mean)) +
 	geom_pointrange(aes(x = ecosystem, ymin = mean - std.error, ymax = mean + std.error))
 
-marginal <-  emmeans(mod, ~ ecosystem)
-
-pairwise_comps <- pairs(marginal, adjust="tukey") ### don't get the same results as Ryan :( 
 
 
 # ALA ---------------------------------------------------------------------
@@ -113,6 +120,8 @@ ala2 %>%
 	ggplot(aes(x = ecosystem, y = mean)) +
 	geom_pointrange(aes(x = ecosystem, ymin = mean - std.error, ymax = mean + std.error))
 
-marginal <-  emmeans(mod, ~ ecosystem)
+```
 
-pairwise_comps <- pairs(marginal, adjust="tukey") ### don't get the same results as Ryan :( 
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Cmd+Option+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Cmd+Shift+K* to preview the HTML file).
